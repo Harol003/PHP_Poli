@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consumir Servicio de Usuarios</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #usuariosTable {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        #usuariosTable th, #usuariosTable td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        #usuariosTable th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Lista de Usuarios</h1>
+
+    <button onclick="loadUsuarios()">Cargar Usuarios</button>
+
+    <table id="usuariosTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre de Usuario</th>
+                <th>Email</th>
+                <th>Fecha de Creación</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Aquí se mostrarán los usuarios -->
+        </tbody>
+    </table>
+
+    <script>
+        // Función para cargar la lista de usuarios desde el servicio PHP
+        function loadUsuarios() {
+            // Realizar una solicitud HTTP al archivo PHP (usuarios.php)
+            fetch('usuarios.php')
+                .then(response => response.text())  // Obtener la respuesta como texto
+                .then(data => {
+                    // Insertar el contenido HTML recibido en la tabla
+                    document.querySelector('#usuariosTable tbody').innerHTML = data;
+                })
+                .catch(error => {
+                    console.error('Error al cargar los usuarios:', error);
+                });
+        }
+    </script>
+
+</body>
+</html>
